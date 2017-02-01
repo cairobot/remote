@@ -7,8 +7,6 @@ import at.cairobot.remote.support.InjectInputStream;
 import at.cairobot.remote.support.PfuschScanner;
 import at.cairobot.remote.support.PopupIcon;
 import at.cairobot.remote.support.SplitOutputStream;
-import java.awt.Color;
-import java.awt.Rectangle;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
@@ -17,7 +15,6 @@ import java.nio.charset.Charset;
 import javax.swing.JFrame;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 /**
  *
@@ -128,6 +125,9 @@ public class Main extends JFrame {
                                 pi.setAlert(false);
                         }
                 });
+                tp.setEnabledAt(1, false);
+                tp.setEnabledAt(2, false);
+                tp.setEnabledAt(3, false);
                 super.getContentPane().add(tp);
 
                 super.pack();
@@ -170,6 +170,7 @@ public class Main extends JFrame {
                         s = new Socket(vals[0], Integer.parseInt(vals[1]));
                 } catch (IOException ex) {
                         s = null;
+                        ex.printStackTrace(System.err);
                 }
 
                 if (s == null) {
@@ -217,8 +218,10 @@ public class Main extends JFrame {
                                 public void doWrite(String s)
                                 {
                                         taos.println(s);
-                                        pi.setAlert(true);
-                                        tp.repaint();
+                                        if (tp.getSelectedIndex() != 3) {
+                                                pi.setAlert(true);
+                                                tp.repaint();
+                                        }
                                 }
                         };
                         sock_rd_thrd.start();
@@ -226,6 +229,9 @@ public class Main extends JFrame {
                         ex.printStackTrace(System.err);
                 }
                 
+                tp.setEnabledAt(1, true);
+                tp.setEnabledAt(2, true);
+                tp.setEnabledAt(3, true);
                 taos.println("Opened connection");
         }
 

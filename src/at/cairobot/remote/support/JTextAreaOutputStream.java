@@ -23,6 +23,7 @@ public class JTextAreaOutputStream extends OutputStream {
         @Override
         public void write(int b) throws IOException
         {
-                ta.append(new String(new int[]{b}, 0, 1));
+                if (b <= 0b01111111)
+                        ta.append(new String(new int[]{b}, 0, 1));
         }
 }
