@@ -10,7 +10,10 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.net.URL;
 import javax.imageio.ImageIO;
@@ -25,7 +28,7 @@ public class ImagePanel extends JPanel {
         private BufferedImage image;
         private Image resized;
 
-        public ImagePanel(File f)
+        public ImagePanel(InputStream f)
         {
                 try {
                         image = ImageIO.read(f);
@@ -44,11 +47,15 @@ public class ImagePanel extends JPanel {
                 });
         }
         
-        public ImagePanel(URL u) throws URISyntaxException {
+        public ImagePanel(File f) throws FileNotFoundException {
+                this(new FileInputStream(f));
+        }
+        
+        public ImagePanel(URL u) throws URISyntaxException, FileNotFoundException {
                 this(new File(u.toURI()));
         }
         
-        public ImagePanel(String f) {
+        public ImagePanel(String f) throws FileNotFoundException {
                 this(new File(f));
         }
 

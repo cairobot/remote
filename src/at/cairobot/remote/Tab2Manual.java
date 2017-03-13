@@ -15,6 +15,8 @@ import java.awt.Graphics;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import java.net.URISyntaxException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoundedRangeModel;
@@ -42,7 +44,7 @@ public class Tab2Manual extends JPanel {
         private final JPanel pane_right;
         private final IdJSlider[] sliders;
 
-        public Tab2Manual(JFrame p)
+        public Tab2Manual(JFrame p) 
         {
                 super();
                 parent = p;
@@ -61,7 +63,7 @@ public class Tab2Manual extends JPanel {
 
                 pane_main = new JPanel(new GridLayout(1, 3));
                 pane_left = new JPanel(new GridLayout(6, 1));
-                pane_mid = new ImagePanel("/Users/redxef/Desktop/Untitled.png");
+                pane_mid = new ImagePanel(Main.class.getResourceAsStream("resources/Spider.png"));
                 pane_right = new JPanel(new GridLayout(6, 1));
                 sliders = new IdJSlider[12];
                 for (int i = 0; i < 12; i++) {
