@@ -146,7 +146,6 @@ public class Main extends JFrame {
                 tab1.reinitSize();
                 tab2.reinitSize();
                 tab3.reinitSize();
-
         }
 
         public void setSocket(String s_)
