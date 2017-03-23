@@ -44,6 +44,15 @@ public class Tab1Remote extends JPanel {
         private static final String BUTTON_TEXT_RIGHT = "RIGHT";
         private static final String BUTTON_TEXT_DOWN = "DOWN";
 
+        private static final String PRG_USE_CCW = "rleft";
+        private static final String PRG_USE_UP = "lauf";
+        private static final String PRG_USE_CW = "rright";
+        private static final String PRG_USE_LEFT = "tleft";
+        private static final String PRG_USE_STOP = "stand";
+        private static final String PRG_USE_RIGHT = "tright";
+        private static final String PRG_USE_DOWN = "back";
+        
+        
         private static final String TOOLTIP_BTNS = "Tip: Use WASD, QE and \\ for controls!";
         private final List<Pair<JButton, Character>> ll;
 
@@ -345,27 +354,28 @@ public class Tab1Remote extends JPanel {
                 selected = c;
                 switch (c) {
                         case 'q':
-                                send.append("ccw");
+                                send.append(PRG_USE_CCW);
                                 break;
                         case 'w':
-                                send.append("up");
+                                send.append(PRG_USE_UP);
                                 break;
                         case 'e':
-                                send.append("cw");
+                                send.append(PRG_USE_CW);
                                 break;
                         case 'a':
-                                send.append("left");
+                                send.append(PRG_USE_LEFT);
                                 break;
                         case '\\':
-                                send.append("stop");
+                                send.append(PRG_USE_STOP);
                                 break;
                         case 'd':
-                                send.append("right");
+                                send.append(PRG_USE_RIGHT);
                                 break;
                         case 's':
-                                send.append("down");
+                                send.append(PRG_USE_DOWN);
                                 break;
                         default:
+                                send.append("idle");
                                 break;
                 }
 
@@ -376,7 +386,7 @@ public class Tab1Remote extends JPanel {
         {
                 char c = getButtonModelChar((ButtonModel) e.getSource());
                 if (c == selected) {
-                        doSend("fwdeselect");
+                        doSend("fwselect " + PRG_USE_STOP);
                         selected = '\0';
                 }
         }

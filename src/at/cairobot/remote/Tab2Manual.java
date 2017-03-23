@@ -7,25 +7,11 @@ import at.cairobot.remote.support.IdJSlider;
 import at.cairobot.remote.support.ImagePanel;
 import at.cairobot.remote.support.IntervalChecker;
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.ComponentOrientation;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.net.URISyntaxException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.BoundedRangeModel;
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -68,8 +54,8 @@ public class Tab2Manual extends JPanel {
                 sliders = new IdJSlider[12];
                 for (int i = 0; i < 12; i++) {
                         sliders[i] = new IdJSlider(0, 180, 90);
-                        sliders[i].setPaintLabels(true);
-                        sliders[i].setPaintTicks(true);
+//                        sliders[i].setPaintLabels(true);
+//                        sliders[i].setPaintTicks(true);
                         sliders[i].setMajorTickSpacing(180);
                         sliders[i].addChangeListener(new ChangeListener() {
 
@@ -84,18 +70,19 @@ public class Tab2Manual extends JPanel {
                                         if (!(e.getSource() instanceof IdJSlider))
                                                 return;
                                         s = (IdJSlider) e.getSource();
-                                        if (s.getID() >= 0 && s.getID() <= 3) {
-                                                sb.append('C');
-                                                sb.append((char) ('A' + s.getID()));
-                                        } else if (s.getID() >= 6 && s.getID() <= 9) {
-                                                sb.append('B');
-                                                sb.append((char) ('A' + s.getID() - 6 ));
-                                        } else if (s.getID() >= 4 && s.getID() <= 5) {
-                                                sb.append('A');
-                                                sb.append((char) ('A' + s.getID() - 4));
-                                        } else if (s.getID() >= 10 && s.getID() <= 11) {
-                                                sb.append('A');
-                                                sb.append((char) ('A' + s.getID() - 10 + 2));
+                                        switch(s.getID()) {
+                                                case 0: sb.append("AA"); break;
+                                                case 1: sb.append("AB"); break;
+                                                case 2: sb.append("BA"); break;
+                                                case 3: sb.append("BB"); break;
+                                                case 4: sb.append("BD"); break;
+                                                case 5: sb.append("BC"); break;
+                                                case 6: sb.append("AD"); break;
+                                                case 7: sb.append("AC"); break;
+                                                case 8: sb.append("CB"); break;
+                                                case 9: sb.append("CA"); break;
+                                                case 10: sb.append("CD"); break;
+                                                case 11: sb.append("CC"); break;
                                         }
                                         sb.append(' ');
                                         sb.append(Integer.toString(s.getValue()));
